@@ -1,0 +1,8 @@
+{
+"postgresql": {
+    "password": {
+      "postgres": "p@ssw0rd"
+    }
+  },
+  "run_list": ["recipe[postgresql]", "recipe[teamcityapp]"]
+}

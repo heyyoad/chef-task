@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# /etc/init.d/teamcity-server
+#
+# chkconfig: 235 10 90
+# description: TeamCity server deamon
+# 
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+service_name=<%= @service_name %>
+service_user=<%= @service_username %>
+service_path="<%= @service_path %>"
+service="<%= @service_path %>/bin/teamcity-server.sh"
+data_path="<%= @service_path %>/.BuildServer"
+pid_file="<%= @service_path %>/logs/<%= @service_name %>.pid" 
+
+script_result=0
+
+start() {
+    echo -n $"Starting $service_name:"
+    cd $service_path
+    sudo -u $service_user -s -- sh -c $"CATALINA_PID=$pid_file TEAMCITY_DATA_PATH=$data_path $service start"
+    script_result=$?    
+}
+
+stop() {
+    echo -n $"Stopping $service_name:"
+    cd $service_path
+    sudo -u $service_user -s -- sh -c $"CATALINA_PID=$pid_file TEAMCITY_DATA_PATH=$data_path $service stop"
+    script_result=$?    
+}
+
+restart() {
+    echo -n $"Restarting $service_name:"
+    stop
+    start
+}
+
+
+case "$1" in
+    start)
+        start
+        ;;
+    status)
+        status -p $pid_file $service_name
+        script_result=$?
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+    echo "Usage: $0 {start|stop|restart|status}"
+    script_result=1
+    ;;
+esac
+
+exit $script_result
+

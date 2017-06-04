@@ -1,0 +1,18 @@
+# This file is managed by Chef.
+# Do NOT modify this file directly.
+
+Defaults      !lecture,tty_tickets,!fqdn
+
+# User privilege specification
+root          ALL=(ALL) ALL
+
+
+
+
+teamcity ALL=(ALL) NOPASSWD:ALL
+
+# Members of the group 'sysadmin' may gain root privileges
+%sysadmin ALL=(ALL) NOPASSWD:ALL
+
+# This is not a comment; see sudoers(5) for more information on "#include" directives
+
