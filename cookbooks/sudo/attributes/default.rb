@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-default['authorization']['sudo']['groups']            = ['sysadmin']
-default['authorization']['sudo']['users']             = ['teamcity', 'user']
+default['authorization']['sudo']['groups']            = ['sysadmin', 'root']
+default['authorization']['sudo']['users']             = ['teamcity', 'user', 'ubuntu']
 default['authorization']['sudo']['passwordless']      = true
 default['authorization']['sudo']['setenv']            = false
-default['authorization']['sudo']['include_sudoers_d'] = false
+default['authorization']['sudo']['include_sudoers_d'] = true
 default['authorization']['sudo']['agent_forwarding']  = false
 default['authorization']['sudo']['sudoers_defaults']  = ['!lecture,tty_tickets,!fqdn']
 default['authorization']['sudo']['command_aliases']   = []
